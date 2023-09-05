@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd-service
+  namespace: frontend
+spec:
+  selector:
+    app: apache 
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30004
+
+---
+
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: ${image}
+  namespace: frontend
+  labels:
+    app: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache 
+    spec:
+      containers:
+      - name: httpd-app
+        image: ${image}
+        ports:
+        - containerPort: 80
+      
