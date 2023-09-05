@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: image
+  name: Label
   labels:
     app: apache
 spec:
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: httpd-app
-        image: ${image}
+        image: ${env.IMAGE_NAME}
         ports:
         - containerPort: 80
       
