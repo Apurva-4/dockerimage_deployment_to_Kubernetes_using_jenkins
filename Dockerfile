@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get install httpd -y
+RUN apt -y install httpd:latest
 
 COPY index.html /var/www/html/
 
