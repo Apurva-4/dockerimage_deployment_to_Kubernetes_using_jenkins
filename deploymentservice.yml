@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: httpd-app
-        image: 2002456/httpd:V4
+        image: 2002456/httpd:V5
         ports:
         - containerPort: 80
       
