@@ -1,8 +1,8 @@
-FROM ubuntu 
-RUN apt update 
+FROM ubuntu
+RUN apt update
 RUN apt install apache2 -y
 RUN apt install apache2-utils -y
-RUN apt clean 
 COPY index.html /usr/local/apache2/htdocs/
 EXPOSE 80
-CMD ["httpd-foreground"]
+ENTRYPOINT ["apache2ctl"]
+CMD ["-Dforeground"]
