@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: label_name
+  name: label-name
   labels:
     app: apache
 spec:
