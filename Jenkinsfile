@@ -17,7 +17,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          sh 'docker build -t 2002456/httpd .'
+          sh 'docker build -t 2002456/httpd:v12 .'
         }
       }
     }
@@ -29,7 +29,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            sh 'docker push  2002456/httpd:latest'
+            sh 'docker push  2002456/httpd:v12'
           }
         }
       }
