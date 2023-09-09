@@ -32,7 +32,10 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "mykube")
+          kubernetesDeploy (kubeconfigId: 'mykube')
+          {
+          sh 'kubectl set image deployment/httpd-deployment httpd-app=2002456/httpd'
+          }
         }
       }
     }
