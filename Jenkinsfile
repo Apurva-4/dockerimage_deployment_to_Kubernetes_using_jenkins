@@ -1,7 +1,6 @@
 pipeline {
 
   environment {
-    dockerimagename = "2002456/httpd"
     dockerImage = ""
   }
 
@@ -18,7 +17,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename
+          sh 'docker build -t 2002456/httpd'
         }
       }
     }
@@ -30,7 +29,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            docker.push dockerImage
+            sh 'docker push  2002456/httpd.'
           }
         }
       }
