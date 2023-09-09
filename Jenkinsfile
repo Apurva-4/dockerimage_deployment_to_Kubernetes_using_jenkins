@@ -29,7 +29,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            sh 'docker push  2002456/httpd.'
+            sh 'docker push  2002456/httpd'
           }
         }
       }
