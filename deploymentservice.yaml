@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: httpd-app
-        image: 2002456/httpd:V11
+        image: 2002456/httpd:latest
         ports:
         - containerPort: 80
       
