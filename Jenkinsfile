@@ -17,7 +17,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          sh 'docker build -t 2002456/httpd'
+          sh 'docker build -t 2002456/httpd .'
         }
       }
     }
