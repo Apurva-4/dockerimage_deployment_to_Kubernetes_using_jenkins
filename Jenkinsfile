@@ -1,9 +1,5 @@
 pipeline {
 
-  environment {
-    dockerImage = ""
-  }
-
   agent {label "docker"}
 
   stages {
@@ -17,19 +13,17 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          sh 'docker build -t 2002456/httpd:v12 .'
+          sh 'docker build -t 2002456/httpd .'
         }
       }
     }
 
     stage('Pushing Image') {
-      environment {
-               registryCredential = 'docker-pass'
-           }
       steps{
         script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            sh 'docker push  2002456/httpd:v12'
+          withDockerRegistry(credentialsId: 'docker-pass')
+          {
+            sh 'docker push  2002456/httpd'
           }
         }
       }
