@@ -8,7 +8,7 @@ pipeline {
                     kubernetesDeploy(configs: 'deploymentservice.yaml',kubeconfigId: "mykube")
                     def deployExists = sh(script: 'kubectl get deploy | grep httpd-deployment', returnStatus: true)
                     if (deployExists == 0) {
-                        // Deployment exists
+                        
                         sh 'kubectl set image deploy/httpd-deployment httpd-app=2002456/web-app:latest'
                         sh 'kubectl rollout restart deploy/httpd-deployment'
                     } else {
