@@ -1,9 +1,22 @@
-stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(kubeconfigId: "mykube")
-          sh 'kubectl set image deployment/httpd-deployment httpd-app=2002456/httpd:latest'
+pipeline {
+    agent kubernetes
 
+    stages {
+        stage('Check Deployment') {
+            steps {
+                script {
+                    kubernetesDeploy(config: "deploymentservice.yaml",kubeconfigId: "mykube")
+                    def deployExists = sh(script: 'kubectl get deploy | grep httpd-deployment', returnStatus: true)
+                    if (deployExists == 0) {
+                        // Deployment exists
+                        sh 'kubectl set image deploy/httpd-deployment httpd-app=2002456/web-app:latest'
+                        sh 'kubectl rollout restart deploy/httpd-deployment'
+                    } else {
+                        // Deployment does not exist
+                        sh 'kubectl apply -f deploymentservice.yaml'
+                    }
+                }
+            }
         }
-      }
     }
+}
