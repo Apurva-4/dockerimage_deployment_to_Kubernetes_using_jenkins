@@ -5,7 +5,7 @@ pipeline {
         stage('Check Deployment') {
             steps {
                 script {
-                    kubernetesDeploy(config: "deploymentservice.yaml",kubeconfigId: "mykube")
+                    kubernetesDeploy(configs: 'deploymentservice.yaml',kubeconfigId: "mykube")
                     def deployExists = sh(script: 'kubectl get deploy | grep httpd-deployment', returnStatus: true)
                     if (deployExists == 0) {
                         // Deployment exists
