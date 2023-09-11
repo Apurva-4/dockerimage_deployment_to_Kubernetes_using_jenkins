@@ -21,7 +21,7 @@ pipeline {
     stage('Pushing Image') {
       steps{
         script {
-          withDockerRegistry(credentialsId: 'docker-pass')
+          withDockerRegistry(credentialsId: 'dockerhub')
           {
             sh 'docker push  2002456/httpd'
           }
